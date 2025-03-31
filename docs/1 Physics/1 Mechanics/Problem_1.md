@@ -70,5 +70,3 @@ R = \frac{v_0 \cos(\theta)}{g} \left(v_0 \sin(\theta) + \sqrt{(v_0 \sin(\theta))
 
 ### **Conclusion**
 This analysis provides insight into how projectile range depends on the launch angle. While an idealized model suffices for many applications, real-world conditions require numerical simulations.
-
-Would you like a Markdown version or a Jupyter Notebook file for this? 🚀
