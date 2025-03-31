@@ -62,7 +62,9 @@ R = \frac{v_0 \cos(\theta)}{g} \left(v_0 \sin(\theta) + \sqrt{(v_0 \sin(\theta))
 ---
 
 ## **4. Implementation (Python Simulation)**
-(image.png)
+![alt text](image-9.png)
+![alt text](image-11.png)
+![alt text](image-12.png)
 ## **5. Limitations and Realistic Factors**
 - **Air resistance**: Reduces range.
 - **Wind effects**: Alters trajectory.
