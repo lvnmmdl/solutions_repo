@@ -62,33 +62,7 @@ R = \frac{v_0 \cos(\theta)}{g} \left(v_0 \sin(\theta) + \sqrt{(v_0 \sin(\theta))
 ---
 
 ## **4. Implementation (Python Simulation)**
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Constants
-g = 9.81  # gravity (m/s^2)
-v0 = 20   # initial velocity (m/s)
-angles = np.linspace(0, 90, 100)  # Angle range in degrees
-
-# Compute range for each angle
-ranges = (v0**2 * np.sin(np.radians(2 * angles))) / g
-
-# Plot results
-plt.figure(figsize=(8, 5))
-plt.plot(angles, ranges, label="Range vs Angle", color='b')
-plt.axvline(45, linestyle="--", color="red", label="Max Range at 45°")
-plt.xlabel("Launch Angle (degrees)")
-plt.ylabel("Range (m)")
-plt.title("Projectile Range vs. Launch Angle")
-plt.legend()
-plt.grid()
-plt.show()
-```
-
----
-
+![alt text](image.png)
 ## **5. Limitations and Realistic Factors**
 - **Air resistance**: Reduces range.
 - **Wind effects**: Alters trajectory.
