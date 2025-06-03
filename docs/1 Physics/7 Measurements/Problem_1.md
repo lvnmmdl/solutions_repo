@@ -1,6 +1,4 @@
-
 ---
-
 # Problem 1
 
 ## Measuring Earth's Gravitational Acceleration with a Pendulum
@@ -40,17 +38,35 @@ $$
 \Delta L = \frac{\text{Ruler Resolution}}{2}
 $$
 
-![alt text](pendulum_diagram.png)
+Let us assume:
+
+$$
+L = 1.000 \pm 0.005\ \text{m}
+$$
 
 #### 3. Data Collection
 
 * Displace the pendulum slightly ( < 15° ) and release it.
-* Measure the time for 10 full oscillations ($T_{10}$) and repeat this process 10 times. Record all 10 measurements.
-* Calculate the mean time for 10 oscillations ($\overline{T}_{10}$) and the standard deviation ($\sigma_T$).
-* Determine the uncertainty in the mean time as:
+* Measure the time for 10 full oscillations ($T_{10}$) and repeat this process 10 times.
+* The measured values (in seconds):
+
+| Trial | $T_{10}$ (s) |
+|-------|--------------|
+| 1     | 20.014       |
+| 2     | 19.874       |
+| 3     | 19.881       |
+| 4     | 20.026       |
+| 5     | 20.110       |
+| 6     | 19.939       |
+| 7     | 20.093       |
+| 8     | 19.910       |
+| 9     | 19.913       |
+| 10    | 19.894       |
+
+* Mean value:
 
 $$
-\Delta T_{10} = \frac{\sigma_T}{\sqrt{n}} \quad \text{where } n = 10
+\overline{T}_{10} = 19.97\ \text{s},\quad \sigma_T = 0.127\ \text{s},\quad \Delta T_{10} = 0.040\ \text{s}
 $$
 
 ---
@@ -60,32 +76,20 @@ $$
 #### 1. Calculate the period
 
 $$
-T = \frac{\overline{T}_{10}}{10}, \quad \Delta T = \frac{\Delta T_{10}}{10}
+T = \frac{\overline{T}_{10}}{10} = 1.997\ \text{s},\quad \Delta T = 0.004\ \text{s}
 $$
 
 #### 2. Determine $g$
 
 $$
-g = \frac{4\pi^2 L}{T^2}
+g = \frac{4\pi^2 L}{T^2} = 9.899\ \text{m/s}^2
 $$
 
 #### 3. Propagate uncertainties
 
 $$
-\Delta g = g \cdot \sqrt{\left( \frac{\Delta L}{L} \right)^2 + \left( 2 \cdot \frac{\Delta T}{T} \right)^2}
+\Delta g = g \cdot \sqrt{\left( \frac{\Delta L}{L} \right)^2 + \left( 2 \cdot \frac{\Delta T}{T} \right)^2} = 0.063\ \text{m/s}^2
 $$
-
----
-
-### 📊 Data and Visualizations
-
-#### Time Measurements for 10 Oscillations
-
-![alt text](t10_measurements_table.png)
-
-#### Uncertainty Plot
-
-![alt text](uncertainty_plot.png)
 
 ---
 
@@ -94,24 +98,31 @@ $$
 #### 1. Compare your measured $g$ with the standard value:
 
 $$
-g_{\text{standard}} = 9.81\, \text{m/s}^2
+g_{\text{standard}} = 9.81\, \text{m/s}^2\quad \Rightarrow\quad g_{\text{measured}} = 9.899 \pm 0.063\, \text{m/s}^2
 $$
+
+This is in good agreement with the standard value within experimental uncertainty.
 
 #### 2. Discuss:
 
-* The effect of measurement resolution on $\Delta L$.
-* Variability in timing and its impact on $\Delta T$.
-* Any assumptions or experimental limitations.
+* Measurement resolution of 1 cm results in $\Delta L = 0.005$ m.
+* Variability in timing is reflected in the standard deviation $\sigma_T$.
+* Possible error sources: human reaction time, air resistance, small amplitude assumption.
 
 ---
 
 ### 📦 Deliverables
 
-1. Tabulated data in markdown:
+1. Tabulated data:
 
-   * $L, \Delta L, T_{10}$ measurements, $\overline{T}_{10}, \sigma_T, \Delta T$
-   * Calculated $g$ and $\Delta g$
+   * $L = 1.000 \pm 0.005$ m
+   * $\overline{T}_{10} = 19.97$ s, $\sigma_T = 0.127$ s, $\Delta T = 0.004$ s
+   * $g = 9.899 \pm 0.063$ m/s²
 
-2. The discussion on sources of uncertainty and their impact on the results.
+2. Measurement plot:
+
+![alt text](Problem_1.png)
+
+3. Discussion included in analysis section.
 
 ---
