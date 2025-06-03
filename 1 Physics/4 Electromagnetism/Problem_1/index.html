@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 1 - Physics and Mathematics</title>
+<title>Problem 1: Simulating the Effects of the Lorentz Force - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 1";
+        var mkdocs_page_name = "Problem 1: Simulating the Effects of the Lorentz Force";
         var mkdocs_page_input_path = "1 Physics/4 Electromagnetism/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -70,21 +70,47 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">4 Electromagnetism</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1: Simulating the Effects of the Lorentz Force</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#1-introduction-and-motivation">1. Introduction and Motivation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#2-theory-and-mathematical-framework">2. Theory and Mathematical Framework</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#lorentz-force-decomposition">Lorentz Force Decomposition</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#circular-and-helical-motion">Circular and Helical Motion</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#3-simulation-methodology">3. Simulation Methodology</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#4-visualization-of-results">4. Visualization of Results</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#case-1-motion-in-a-uniform-magnetic-field">Case 1: Motion in a Uniform Magnetic Field</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#case-2-crossed-electric-and-magnetic-fields">Case 2: Crossed Electric and Magnetic Fields</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#case-3-parallel-electric-and-magnetic-fields">Case 3: Parallel Electric and Magnetic Fields</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#5-physical-interpretation-and-application">5. Physical Interpretation and Application</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#6-conclusion">6. Conclusion</a>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal">5 Circuits</a>
 <ul>
-<li class="toctree-l2"><a class="reference internal" href="../../5%20Circuits/Problem_1/">Problem 1</a>
+<li class="toctree-l2"><a class="reference internal" href="../../5%20Circuits/Problem_1/">Problem 1: Equivalent Resistance Using Graph Theory</a>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal">6 Statistics</a>
 <ul>
-<li class="toctree-l2"><a class="reference internal" href="../../6%20Statistics/Problem_1/">Problem 1</a>
+<li class="toctree-l2"><a class="reference internal" href="../../6%20Statistics/Problem_1/">Problem 1: Exploring the Central Limit Theorem through Simulations</a>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../6%20Statistics/Problem_2/">Problem 2</a>
 </li>
@@ -163,7 +189,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">4 Electromagnetism</li>
-<li class="breadcrumb-item active">Problem 1</li>
+<li class="breadcrumb-item active">Problem 1: Simulating the Effects of the Lorentz Force</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,62 +197,139 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
-<h1 id="problem-1-simulating-the-effects-of-the-lorentz-force"><strong>Problem 1: Simulating the Effects of the Lorentz Force</strong></h1>
-<h2 id="motivation"><strong>Motivation</strong></h2>
-<p>The <strong>Lorentz force</strong> governs the motion of charged particles in electromagnetic fields. It is expressed as:<br/>
+<h1 id="problem-1-simulating-the-effects-of-the-lorentz-force">Problem 1: Simulating the Effects of the Lorentz Force</h1>
+<h2 id="1-introduction-and-motivation">1. Introduction and Motivation</h2>
+<p>The Lorentz force governs the motion of charged particles under electric and magnetic fields. It is one of the most fundamental principles in electromagnetism and plays a critical role in systems ranging from fusion reactors and particle accelerators to space weather and auroras.</p>
+<div class="arithmatex">\[
+\vec{F} = q(\vec{E} + \vec{v} \times \vec{B})
+\]</div>
+<p>This force combines the influence of both the electric field <span class="arithmatex">\( \vec{E} \)</span>, which causes linear acceleration, and the magnetic field <span class="arithmatex">\( \vec{B} \)</span>, which causes the particle to curve. Its effects are non-trivial and often counter-intuitive, especially in three-dimensional settings.</p>
+<p>Simulating the motion of particles under this force helps us to understand and visualize physical phenomena in:
+- Magnetic plasma confinement,
+- Mass spectrometry,
+- Electromagnetic wave interactions,
+- Cyclotron operation, and more.</p>
+<h2 id="2-theory-and-mathematical-framework">2. Theory and Mathematical Framework</h2>
+<h3 id="lorentz-force-decomposition">Lorentz Force Decomposition</h3>
+<p>For a particle of charge <span class="arithmatex">\( q \)</span>, mass <span class="arithmatex">\( m \)</span>, and velocity <span class="arithmatex">\( \vec{v} \)</span>, the total force <span class="arithmatex">\( \vec{F} \)</span> is the vector sum of:
+- The <strong>electric force</strong>: <span class="arithmatex">\( q\vec{E} \)</span>,
+- The <strong>magnetic force</strong>: <span class="arithmatex">\( q\vec{v} \times \vec{B} \)</span>.</p>
+<p>This yields the second-order differential equation:</p>
+<div class="arithmatex">\[
+\frac{d\vec{v}}{dt} = \frac{q}{m}(\vec{E} + \vec{v} \times \vec{B})
+\]</div>
+<p>Numerical methods (such as the Euler method) are used to solve this equation and simulate the trajectory <span class="arithmatex">\( \vec{r}(t) \)</span> over time.</p>
+<h3 id="circular-and-helical-motion">Circular and Helical Motion</h3>
+<p>When <span class="arithmatex">\( \vec{E} = 0 \)</span>, the magnetic field causes the particle to move in a circular path if <span class="arithmatex">\( \vec{v} \perp \vec{B} \)</span>, or in a helix if <span class="arithmatex">\( \vec{v} \)</span> also has a component along <span class="arithmatex">\( \vec{B} \)</span>.</p>
+<p>Key equations:
+- <strong>Larmor radius</strong>:<br/>
 [
-\mathbf{F} = q (\mathbf{E} + \mathbf{v} \times \mathbf{B})
-]<br/>
-This force is crucial in <strong>particle accelerators, mass spectrometers, and plasma physics</strong>. By simulating it, we can visualize particle trajectories and explore its real-world applications.  </p>
-<hr/>
-<h2 id="theory"><strong>Theory</strong></h2>
-<h3 id="motion-in-a-uniform-magnetic-field"><strong>Motion in a Uniform Magnetic Field</strong></h3>
+r_L = \frac{mv_\perp}{|q|B}
+]</p>
 <ul>
-<li>A charged particle moves in a <strong>circular</strong> or <strong>helical</strong> path.  </li>
-<li>The <strong>Larmor radius</strong> (cyclotron radius) is given by:<br/>
-  [
-  r_L = \frac{m v_{\perp}}{|q| B}
-  ]  </li>
-<li>The <strong>cyclotron frequency</strong> is:<br/>
-  [
-  \omega_c = \frac{|q| B}{m}
-  ]  </li>
+<li>
+<p><strong>Cyclotron frequency</strong>:<br/>
+[
+\omega_c = \frac{|q|B}{m}
+]</p>
+</li>
+<li>
+<p><strong>E × B drift velocity</strong> (when <span class="arithmatex">\( \vec{E} \perp \vec{B} \)</span>):<br/>
+[
+\vec{v}_{\text{drift}} = \frac{\vec{E} \times \vec{B}}{B^2}
+]</p>
+</li>
 </ul>
-<h3 id="motion-in-electric-magnetic-fields"><strong>Motion in Electric &amp; Magnetic Fields</strong></h3>
+<h2 id="3-simulation-methodology">3. Simulation Methodology</h2>
+<p>We consider three different configurations of electric and magnetic fields:</p>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Electric Field <span class="arithmatex">\( \vec{E} \)</span></th>
+<th>Magnetic Field <span class="arithmatex">\( \vec{B} \)</span></th>
+<th>Velocity <span class="arithmatex">\( \vec{v}_0 \)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>[0, 0, 0]</td>
+<td>[0, 0, 1] T</td>
+<td>[10^6, 0, 0] m/s</td>
+</tr>
+<tr>
+<td>2</td>
+<td>[10^5, 0, 0]</td>
+<td>[0, 0, 1] T</td>
+<td>[0, 10^6, 0] m/s</td>
+</tr>
+<tr>
+<td>3</td>
+<td>[0, 0, 10^5]</td>
+<td>[0, 0, 1] T</td>
+<td>[10^6, 0, 0] m/s</td>
+</tr>
+</tbody>
+</table>
 <ul>
-<li><strong>Parallel fields (<span class="arithmatex">\(\mathbf{E} \parallel \mathbf{B}\)</span>)</strong>: The particle accelerates linearly.  </li>
-<li><strong>Perpendicular fields (<span class="arithmatex">\(\mathbf{E} \perp \mathbf{B}\)</span>)</strong>: Leads to a <strong>drift motion</strong> with velocity:<br/>
-  [
-  v_d = \frac{E}{B}
-  ]  </li>
+<li><strong>Method</strong>: Euler integration.</li>
+<li><strong>Time step</strong>: <span class="arithmatex">\( \Delta t = 10^{-11} \)</span> s</li>
+<li><strong>Number of steps</strong>: 2000</li>
+<li><strong>Particle</strong>: Electron (<span class="arithmatex">\( q = -1.6 \times 10^{-19} \)</span> C, <span class="arithmatex">\( m = 9.11 \times 10^{-31} \)</span> kg)</li>
 </ul>
-<hr/>
-<h2 id="python-simulation"><strong>Python Simulation</strong></h2>
-<p><img alt="alt text" src="../image-1.png"/></p>
-<h2 id="results-discussion"><strong>Results &amp; Discussion</strong></h2>
-<ul>
-<li>The particle follows a <strong>helical path</strong> due to the Lorentz force.  </li>
-<li>Increasing <strong>magnetic field strength</strong> reduces the <strong>Larmor radius</strong>, making the spiral tighter.  </li>
-<li>Adding an <strong>electric field</strong> causes <strong>drift motion</strong> in a straight line.  </li>
-</ul>
-<h3 id="real-world-applications"><strong>Real-World Applications</strong></h3>
-<ul>
-<li><strong>Cyclotrons &amp; Synchrotrons</strong>: Use magnetic fields to accelerate charged particles.  </li>
-<li><strong>Mass Spectrometry</strong>: Separates ions based on their charge-to-mass ratio.  </li>
-<li><strong>Plasma Confinement</strong>: Magnetic fields contain plasma in <strong>fusion reactors</strong>.  </li>
-</ul>
-<hr/>
-<h2 id="conclusion"><strong>Conclusion</strong></h2>
-<p>This simulation provides insights into the <strong>motion of charged particles</strong> in electromagnetic fields. Future work can include:<br/>
-✅ <strong>Non-uniform magnetic fields</strong><br/>
-✅ <strong>Time-dependent fields</strong><br/>
-✅ <strong>Relativistic effects</strong></p>
+<h2 id="4-visualization-of-results">4. Visualization of Results</h2>
+<h3 id="case-1-motion-in-a-uniform-magnetic-field">Case 1: Motion in a Uniform Magnetic Field</h3>
+<p>Trajectory: <strong>Circular/Helical Motion</strong></p>
+<p><img alt="alt text" src="../trajectory_uniform_B.png"/></p>
+<h3 id="case-2-crossed-electric-and-magnetic-fields">Case 2: Crossed Electric and Magnetic Fields</h3>
+<p>Trajectory: <strong>Helical Path + Drift (E × B)</strong></p>
+<p><img alt="alt text" src="../trajectory_exb_drift.png"/></p>
+<h3 id="case-3-parallel-electric-and-magnetic-fields">Case 3: Parallel Electric and Magnetic Fields</h3>
+<p>Trajectory: <strong>Accelerated Helix</strong></p>
+<p><img alt="alt text" src="../trajectory_parallel_eb.png"/></p>
+<h2 id="5-physical-interpretation-and-application">5. Physical Interpretation and Application</h2>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Relevance of Lorentz Force</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cyclotron</strong></td>
+<td>Circular motion from <span class="arithmatex">\( \vec{v} \perp \vec{B} \)</span></td>
+</tr>
+<tr>
+<td><strong>Mass Spectrometer</strong></td>
+<td>Particle deflection reveals mass-to-charge ratio</td>
+</tr>
+<tr>
+<td><strong>Tokamak Fusion Reactor</strong></td>
+<td>Plasma held in place via spiral confinement</td>
+</tr>
+<tr>
+<td><strong>Auroras</strong></td>
+<td>Charged particles spiral along Earth’s field lines</td>
+</tr>
+<tr>
+<td><strong>Cathode Ray Tube (CRT)</strong></td>
+<td>Magnetic deflection creates image projection</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-conclusion">6. Conclusion</h2>
+<p>Through this simulation, we gain an intuitive and mathematical understanding of:
+- <strong>How field configurations alter motion</strong>,
+- <strong>Why cyclotrons and fusion devices depend on magnetic confinement</strong>,
+- <strong>The physical basis for phenomena like E × B drift and Larmor motion</strong>.</p>
+<p>Simulating Lorentz-force-driven dynamics demonstrates the power of physics-informed computation in modeling complex systems — from charged particles in labs to space plasmas in the cosmos.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
 <a class="btn btn-neutral float-left" href="../../3%20Waves/Problem_1/" title="Problem 1"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-<a class="btn btn-neutral float-right" href="../../5%20Circuits/Problem_1/" title="Problem 1">Next <span class="icon icon-circle-arrow-right"></span></a>
+<a class="btn btn-neutral float-right" href="../../5%20Circuits/Problem_1/" title="Problem 1: Equivalent Resistance Using Graph Theory">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr/>
 <div role="contentinfo">

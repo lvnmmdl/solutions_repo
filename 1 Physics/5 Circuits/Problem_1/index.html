@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 1 - Physics and Mathematics</title>
+<title>Problem 1: Equivalent Resistance Using Graph Theory - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 1";
+        var mkdocs_page_name = "Problem 1: Equivalent Resistance Using Graph Theory";
         var mkdocs_page_input_path = "1 Physics/5 Circuits/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -70,21 +70,49 @@
 </li>
 <li class="toctree-l1"><a class="reference internal">4 Electromagnetism</a>
 <ul>
-<li class="toctree-l2"><a class="reference internal" href="../../4%20Electromagnetism/Problem_1/">Problem 1</a>
+<li class="toctree-l2"><a class="reference internal" href="../../4%20Electromagnetism/Problem_1/">Problem 1: Simulating the Effects of the Lorentz Force</a>
 </li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">5 Circuits</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1: Equivalent Resistance Using Graph Theory</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#motivation">Motivation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#theoretical-framework">Theoretical Framework</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#circuit-as-a-graph">Circuit as a Graph</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#option-1-simplified-algorithm-description">Option 1: Simplified Algorithm Description</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#series-and-parallel-reduction-logic">Series and Parallel Reduction Logic</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pseudocode-for-reduction">Pseudocode for Reduction</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#option-2-full-python-implementation">Option 2: Full Python Implementation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#example-1-simple-series">Example 1: Simple Series</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#example-2-simple-parallel">Example 2: Simple Parallel</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#example-3-nested-configuration">Example 3: Nested Configuration</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#complexity-and-optimizations">Complexity and Optimizations</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal">6 Statistics</a>
 <ul>
-<li class="toctree-l2"><a class="reference internal" href="../../6%20Statistics/Problem_1/">Problem 1</a>
+<li class="toctree-l2"><a class="reference internal" href="../../6%20Statistics/Problem_1/">Problem 1: Exploring the Central Limit Theorem through Simulations</a>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../6%20Statistics/Problem_2/">Problem 2</a>
 </li>
@@ -163,7 +191,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">5 Circuits</li>
-<li class="breadcrumb-item active">Problem 1</li>
+<li class="breadcrumb-item active">Problem 1: Equivalent Resistance Using Graph Theory</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,63 +199,112 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
-<h1 id="problem-1-equivalent-resistance-using-graph-theory"><strong>Problem 1: Equivalent Resistance Using Graph Theory</strong></h1>
-<h2 id="motivation"><strong>Motivation</strong></h2>
-<p>Calculating equivalent resistance in electrical circuits can be complex for large networks. Using <strong>graph theory</strong>, we can model circuits as graphs where:<br/>
-- <strong>Nodes</strong> represent junctions.<br/>
-- <strong>Edges</strong> represent resistors (weights = resistance values).  </p>
-<p>This method simplifies circuit analysis and enables automated calculations.  </p>
+<h1 id="problem-1-equivalent-resistance-using-graph-theory">Problem 1: Equivalent Resistance Using Graph Theory</h1>
 <hr/>
-<h2 id="theory"><strong>Theory</strong></h2>
-<h3 id="series-and-parallel-resistance"><strong>Series and Parallel Resistance</strong></h3>
+<h2 id="motivation">Motivation</h2>
+<p>Calculating equivalent resistance is a core topic in electrical engineering and physics. It allows us to simplify circuit analysis and understand how current flows through different configurations. Traditional approaches rely heavily on applying series and parallel combination rules, which quickly become inefficient or error-prone as circuit complexity increases.</p>
+<p>Graph theory introduces a mathematical framework for representing and solving these problems systematically. By modeling a circuit as a <strong>weighted undirected graph</strong>, where:
+- <strong>Nodes</strong> represent junctions,
+- <strong>Edges</strong> represent resistors (weighted by resistance values),</p>
+<p>we can leverage well-known graph traversal and reduction techniques to simplify the circuit step-by-step.</p>
+<p>This approach is scalable, programmable, and aligns well with modern circuit simulation tools.</p>
+<hr/>
+<h2 id="theoretical-framework">Theoretical Framework</h2>
+<h3 id="circuit-as-a-graph">Circuit as a Graph</h3>
+<p>Each resistor is an edge between two nodes:
+- A series connection forms a <strong>path</strong> in the graph,
+- A parallel connection forms a <strong>cycle</strong>.</p>
+<p>We aim to reduce the graph to a single edge between the source and ground (or any two terminal nodes), representing the <strong>total equivalent resistance</strong>.</p>
+<hr/>
+<h2 id="option-1-simplified-algorithm-description">Option 1: Simplified Algorithm Description</h2>
+<h3 id="series-and-parallel-reduction-logic">Series and Parallel Reduction Logic</h3>
+<h4 id="1-detect-series-connections">1. Detect Series Connections:</h4>
 <ul>
-<li><strong>Series:</strong> <span class="arithmatex">\( R_{\text{eq}} = R_1 + R_2 + ... + R_n \)</span> </li>
-<li><strong>Parallel:</strong> <span class="arithmatex">\( \frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2} + ... + \frac{1}{R_n} \)</span> </li>
+<li>Nodes with <strong>degree 2</strong>, connecting only two resistors, are candidates.</li>
+<li>Combine resistors:</li>
 </ul>
-<h3 id="graph-based-approach"><strong>Graph-Based Approach</strong></h3>
-<ol>
-<li><strong>Build Graph:</strong> Represent resistors as weighted edges.  </li>
-<li><strong>Simplify Series Connections:</strong> Merge nodes with two connections.  </li>
-<li><strong>Simplify Parallel Connections:</strong> Replace multiple edges between two nodes with their equivalent resistance.  </li>
-<li><strong>Repeat Until One Resistance Remains.</strong><br/>
-<img alt="alt text" src="../image%20%281%29.png"/></li>
-</ol>
-<h2 id="example-cases"><strong>Example Cases</strong></h2>
-<table>
-<thead>
-<tr>
-<th>Circuit Type</th>
-<th>Given Resistors</th>
-<th>Equivalent Resistance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Series</strong></td>
-<td>4Ω, 6Ω</td>
-<td>10Ω</td>
-</tr>
-<tr>
-<td><strong>Parallel</strong></td>
-<td>4Ω, 6Ω</td>
-<td>2.4Ω</td>
-</tr>
-<tr>
-<td><strong>Complex</strong></td>
-<td>Mixed</td>
-<td>Computed iteratively</td>
-</tr>
-</tbody>
-</table>
+<div class="arithmatex">\[
+R_{\text{eq}} = R_1 + R_2
+\]</div>
+<h4 id="2-detect-parallel-connections">2. Detect Parallel Connections:</h4>
+<ul>
+<li><strong>Multiple edges</strong> between the same two nodes (parallel resistors).</li>
+<li>Combine using reciprocal rule:</li>
+</ul>
+<div class="arithmatex">\[
+\frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2} + \cdots
+\]</div>
 <hr/>
-<h2 id="conclusion"><strong>Conclusion</strong></h2>
-<p>Using <strong>graph theory</strong>, we can systematically compute <strong>equivalent resistance</strong> in complex circuits, making circuit analysis more efficient and scalable. 🚀</p>
+<h2 id="pseudocode-for-reduction">Pseudocode for Reduction</h2>
+<pre><code>function compute_equivalent_resistance(graph, node_start, node_end):
+    while graph has more than 1 edge between start and end:
+        for each node in graph:
+            if degree(node) == 2:
+                combine_series(node)
+        for each pair of nodes (u, v):
+            if multiple_edges(u, v):
+                combine_parallel(u, v)
+    return weight of final edge between node_start and node_end
+</code></pre>
+<hr/>
+<h2 id="option-2-full-python-implementation">Option 2: Full Python Implementation</h2>
+<p>We implement the algorithm using Python and the <code>networkx</code> library for graph manipulation. The function reduces the graph iteratively by identifying series and parallel connections until only the equivalent resistance remains.</p>
+<blockquote>
+<p><strong>Note</strong>: This section is illustrated with code screenshots or output below.</p>
+</blockquote>
+<hr/>
+<h2 id="example-1-simple-series">Example 1: Simple Series</h2>
+<pre><code>A --[2Ω]-- B --[3Ω]-- C
+</code></pre>
+<p><strong>Expected Result</strong>:</p>
+<div class="arithmatex">\[
+R_{\text{eq}} = 2 + 3 = 5\, \Omega
+\]</div>
+<p><strong>Graph Output</strong>:<br/>
+<img alt="alt text" src="../series_example-1.png"/></p>
+<hr/>
+<h2 id="example-2-simple-parallel">Example 2: Simple Parallel</h2>
+<pre><code>A --[2Ω]-- B  
+ \       
+  \--[2Ω]--/
+</code></pre>
+<p><strong>Expected Result</strong>:</p>
+<div class="arithmatex">\[
+\frac{1}{R_{\text{eq}}} = \frac{1}{2} + \frac{1}{2} = 1 \Rightarrow R_{\text{eq}} = 1\, \Omega
+\]</div>
+<p><strong>Graph Output</strong>:<br/>
+<img alt="alt text" src="../parallel_example-1.png"/></p>
+<hr/>
+<h2 id="example-3-nested-configuration">Example 3: Nested Configuration</h2>
+<pre><code>      [2Ω]
+     /    \
+A --        -- B
+     \[3Ω]/
+</code></pre>
+<p><strong>Expected Result</strong> (Parallel):</p>
+<div class="arithmatex">\[
+\frac{1}{R} = \frac{1}{2} + \frac{1}{3} = \frac{5}{6} \Rightarrow R = 1.2\, \Omega
+\]</div>
+<p><strong>Graph Output</strong>:<br/>
+<img alt="alt text" src="../nested_example-1.png"/></p>
+<hr/>
+<h2 id="complexity-and-optimizations">Complexity and Optimizations</h2>
+<ul>
+<li>The algorithm reduces the graph iteratively by targeting nodes and edges with clear patterns.</li>
+<li><strong>Time complexity</strong> depends on:</li>
+<li>Number of nodes (<span class="arithmatex">\( V \)</span>)</li>
+<li>Number of edges (<span class="arithmatex">\( E \)</span>)</li>
+</ul>
+<p><strong>Best Case</strong>: All series and parallel chains detected in one pass.<br/>
+<strong>Worst Case</strong>: Nested and interconnected structures may require multiple passes.</p>
+<hr/>
+<h2 id="conclusion">Conclusion</h2>
+<p>Graph theory provides a robust method for automating the computation of equivalent resistance. It scales efficiently to complex circuits and allows formal reasoning through the lens of connectivity and structure. Through detection and reduction of series and parallel patterns, we can simulate real-world circuits and contribute to design automation tools and optimization algorithms.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
-<a class="btn btn-neutral float-left" href="../../4%20Electromagnetism/Problem_1/" title="Problem 1"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-<a class="btn btn-neutral float-right" href="../../6%20Statistics/Problem_1/" title="Problem 1">Next <span class="icon icon-circle-arrow-right"></span></a>
+<a class="btn btn-neutral float-left" href="../../4%20Electromagnetism/Problem_1/" title="Problem 1: Simulating the Effects of the Lorentz Force"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../../6%20Statistics/Problem_1/" title="Problem 1: Exploring the Central Limit Theorem through Simulations">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr/>
 <div role="contentinfo">

@@ -72,19 +72,19 @@
 </li>
 <li class="toctree-l1"><a class="reference internal">4 Electromagnetism</a>
 <ul>
-<li class="toctree-l2"><a class="reference internal" href="../../4%20Electromagnetism/Problem_1/">Problem 1</a>
+<li class="toctree-l2"><a class="reference internal" href="../../4%20Electromagnetism/Problem_1/">Problem 1: Simulating the Effects of the Lorentz Force</a>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal">5 Circuits</a>
 <ul>
-<li class="toctree-l2"><a class="reference internal" href="../../5%20Circuits/Problem_1/">Problem 1</a>
+<li class="toctree-l2"><a class="reference internal" href="../../5%20Circuits/Problem_1/">Problem 1: Equivalent Resistance Using Graph Theory</a>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal">6 Statistics</a>
 <ul>
-<li class="toctree-l2"><a class="reference internal" href="../../6%20Statistics/Problem_1/">Problem 1</a>
+<li class="toctree-l2"><a class="reference internal" href="../../6%20Statistics/Problem_1/">Problem 1: Exploring the Central Limit Theorem through Simulations</a>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../6%20Statistics/Problem_2/">Problem 2</a>
 </li>
@@ -171,114 +171,159 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-3">Problem 3</h1>
-<h1 id="problem-3-trajectories-of-a-freely-released-payload-near-earth"><strong>Problem 3: Trajectories of a Freely Released Payload Near Earth</strong></h1>
+<h1 id="problem-3"><strong>Problem 3</strong></h1>
+<h1 id="analysis-of-possible-trajectories-for-a-payload-released-near-earth">Analysis of Possible Trajectories for a Payload Released Near Earth</h1>
+<p>When a payload is released near Earth, its trajectory depends on several factors, including its initial velocity, the angle of release, and the gravitational influence of Earth. The most common types of trajectories are <strong>elliptical</strong>, <strong>parabolic</strong>, and <strong>hyperbolic</strong>. These are determined by the object's <strong>velocity relative to Earth</strong> and the <strong>gravitational force</strong> acting on it.</p>
 <hr/>
-<h2 id="1-introduction"><strong>1. Introduction</strong></h2>
-<p>When a payload is released from a moving rocket near Earth, its trajectory is determined by:
-- <strong>Initial velocity</strong> (relative to Earth),
-- <strong>Altitude</strong> (distance from Earth's center),
-- <strong>Gravity</strong> (attractive force exerted by Earth).  </p>
-<p>Possible trajectories include:
-1. <strong>Elliptical Orbits</strong> (<span class="arithmatex">\( v &lt; v_2 \)</span>): If the payload remains gravitationally bound to Earth.
-2. <strong>Parabolic Escape</strong> (<span class="arithmatex">\( v = v_2 \)</span>): The minimum velocity needed to break free from Earth's gravity.
-3. <strong>Hyperbolic Trajectory</strong> (<span class="arithmatex">\( v &gt; v_2 \)</span>): If the payload completely escapes Earth's gravity.</p>
-<p><strong>Key Question:</strong><br/>
-How does the payload's initial velocity and release altitude determine whether it remains in orbit, falls back to Earth, or escapes? 🚀  </p>
-<hr/>
-<h2 id="2-theoretical-background"><strong>2. Theoretical Background</strong></h2>
-<h3 id="newtons-law-of-gravitation"><strong>Newton's Law of Gravitation</strong></h3>
-<p>The force acting on the payload due to Earth's gravity is:</p>
+<h2 id="1-gravitational-force-and-energy-considerations">1. Gravitational Force and Energy Considerations</h2>
+<p>The <strong>gravitational force</strong> <span class="arithmatex">\(\vec{F}\)</span> acting on an object near Earth is given by Newton’s law of gravitation:</p>
 <div class="arithmatex">\[
-F = \frac{GMm}{r^2}
+\vec{F} = -\frac{G M m}{r^2} \hat{r}
 \]</div>
-<p>where:
-- <span class="arithmatex">\( G = 6.67430 \times 10^{-11} \)</span> m³/kg/s² (gravitational constant),
-- <span class="arithmatex">\( M = 5.972 \times 10^{24} \)</span> kg (Earth's mass),
-- <span class="arithmatex">\( r = R_E + h \)</span> is the payload’s distance from Earth’s center, where <span class="arithmatex">\( R_E = 6.371 \times 10^6 \)</span> m (Earth's radius) and <span class="arithmatex">\( h \)</span> is the altitude.</p>
-<hr/>
-<h3 id="equations-of-motion"><strong>Equations of Motion</strong></h3>
-<p>Newton’s second law gives us:</p>
+<p>Where:</p>
+<ul>
+<li><span class="arithmatex">\(G\)</span> is the gravitational constant <span class="arithmatex">\((6.674 \times 10^{-11} \ \text{Nm}^2/\text{kg}^2)\)</span></li>
+<li><span class="arithmatex">\(M\)</span> is the mass of the Earth <span class="arithmatex">\((5.972 \times 10^{24} \ \text{kg})\)</span></li>
+<li><span class="arithmatex">\(m\)</span> is the mass of the object</li>
+<li><span class="arithmatex">\(r\)</span> is the distance from the center of Earth</li>
+</ul>
+<p>The <strong>specific mechanical energy</strong> <span class="arithmatex">\(\epsilon\)</span> of the object is:</p>
 <div class="arithmatex">\[
-m \frac{d^2 \mathbf{r}}{dt^2} = -\frac{GMm}{r^2} \hat{r}
+\epsilon = \frac{v^2}{2} - \frac{GM}{r}
 \]</div>
-<p>which results in a <strong>two-body problem</strong> that needs numerical integration.</p>
-<h4 id="key-velocities"><strong>Key Velocities:</strong></h4>
-<ol>
+<p>Where <span class="arithmatex">\(v\)</span> is the object's speed and <span class="arithmatex">\(r\)</span> is its distance from Earth's center.</p>
+<hr/>
+<h2 id="2-elliptical-trajectory">2. Elliptical Trajectory</h2>
+<p>Occurs when <span class="arithmatex">\(\epsilon &lt; 0\)</span>. The object is in a <strong>bound</strong> orbit.</p>
+<h3 id="conditions">Conditions:</h3>
+<div class="arithmatex">\[
+\epsilon = \frac{v^2}{2} - \frac{GM}{r} &lt; 0
+\]</div>
+<h3 id="orbital-parameters">Orbital parameters:</h3>
+<ul>
+<li>Semi-major axis <span class="arithmatex">\(a\)</span></li>
+<li>Eccentricity <span class="arithmatex">\(e\)</span></li>
+</ul>
+<p>Relation between energy and semi-major axis:</p>
+<div class="arithmatex">\[
+\epsilon = -\frac{GM}{2a}
+\]</div>
+<hr/>
+<h2 id="3-parabolic-trajectory">3. Parabolic Trajectory</h2>
+<p>Occurs when the object’s velocity equals the <strong>escape velocity</strong>, and <span class="arithmatex">\(\epsilon = 0\)</span>.</p>
+<h3 id="condition">Condition:</h3>
+<div class="arithmatex">\[
+\epsilon = \frac{v^2}{2} - \frac{GM}{r} = 0 \Rightarrow v = \sqrt{\frac{2GM}{r}}
+\]</div>
+<p>This is an <strong>unbound</strong> open trajectory, but with the minimum energy required to escape.</p>
+<hr/>
+<h2 id="4-hyperbolic-trajectory">4. Hyperbolic Trajectory</h2>
+<p>Occurs when the object’s speed is <strong>greater than escape velocity</strong>, hence <span class="arithmatex">\(\epsilon &gt; 0\)</span>.</p>
+<h3 id="condition_1">Condition:</h3>
+<div class="arithmatex">\[
+\epsilon = \frac{v^2}{2} - \frac{GM}{r} &gt; 0 \Rightarrow v &gt; \sqrt{\frac{2GM}{r}}
+\]</div>
+<hr/>
+<h2 id="5-graphical-representation-of-trajectories">5. Graphical Representation of Trajectories</h2>
+<p>We can simulate different paths (elliptical, parabolic, hyperbolic) based on varying initial velocities.</p>
+<p><strong>Python Code for Trajectory Simulation:</strong></p>
+<h2 id="_1"><img alt="alt text" src="../image-2-1.png"/></h2>
+<h1 id="numerical-analysis-of-the-payload-path">Numerical Analysis of the Payload Path</h1>
+<p>We perform numerical simulation using <strong>Euler’s method</strong>.</p>
+<hr/>
+<h2 id="1-equations-of-motion">1. Equations of Motion</h2>
+<p>Acceleration:</p>
+<div class="arithmatex">\[
+\vec{a} = -\frac{GM}{r^3} \vec{r}
+\]</div>
+<p>Velocity update:</p>
+<div class="arithmatex">\[
+\vec{v}_{t+\Delta t} = \vec{v}_t + \vec{a}_t \cdot \Delta t
+\]</div>
+<p>Position update:</p>
+<div class="arithmatex">\[
+\vec{r}_{t+\Delta t} = \vec{r}_t + \vec{v}_t \cdot \Delta t
+\]</div>
+<hr/>
+<h2 id="2-initial-conditions">2. Initial Conditions</h2>
+<ul>
+<li><span class="arithmatex">\(\vec{r}_0 = (R_{\text{Earth}} + h, 0)\)</span>, where <span class="arithmatex">\(h\)</span> is initial altitude (e.g., 100 km)</li>
+<li><span class="arithmatex">\(\vec{v}_0 = (0, v)\)</span>, where <span class="arithmatex">\(v\)</span> is initial velocity (e.g., 8000 m/s)</li>
+</ul>
+<hr/>
+<h2 id="3-numerical-integration">3. Numerical Integration</h2>
+<p><strong>Python Code for Numerical Analysis:</strong></p>
+<p><img alt="alt text" src="../image-3-1.png"/></p>
+<h1 id="trajectories-and-their-relation-to-mission-scenarios">Trajectories and Their Relation to Mission Scenarios</h1>
+<hr/>
+<h2 id="1-orbital-insertion-elliptical-circular">1. Orbital Insertion (Elliptical / Circular)</h2>
+<ul>
 <li>
-<p><strong>Orbital Velocity</strong> (<span class="arithmatex">\( v_1 \)</span>):<br/>
-   [
-   v_1 = \sqrt{\frac{GM}{r}}
-   ]
-   The velocity required for a stable circular orbit.</p>
+<p><strong>Elliptical</strong> when <span class="arithmatex">\(\epsilon &lt; 0\)</span></p>
 </li>
 <li>
-<p><strong>Escape Velocity</strong> (<span class="arithmatex">\( v_2 \)</span>):<br/>
-   [
-   v_2 = \sqrt{\frac{2GM}{r}}
-   ]
-   The velocity required to escape Earth's gravitational pull.</p>
+<p><strong>Orbital velocity</strong> for circular orbit:</p>
 </li>
-</ol>
-<hr/>
-<h2 id="3-computational-simulation"><strong>3. Computational Simulation</strong></h2>
-<p>We'll use <strong>Runge-Kutta numerical integration</strong> to simulate payload motion in 2D.  </p>
-<p><img alt="alt text" src="../image-5.png"/></p>
-<h2 id="4-analysis-of-trajectories"><strong>4. Analysis of Trajectories</strong></h2>
-<p><strong>1. If <span class="arithmatex">\( v &lt; v_1 \)</span> (Suborbital) → Payload Falls Back to Earth:</strong><br/>
-- The payload follows a <strong>parabolic arc</strong>, reaching max altitude before reentering.
-- Example: <strong>Ballistic missiles, suborbital tourism (Blue Origin, Virgin Galactic).</strong> </p>
-<p><strong>2. If <span class="arithmatex">\( v = v_1 \)</span> (Circular Orbit) → Payload Stays in Orbit:</strong><br/>
-- The payload maintains a circular orbit around Earth.
-- Example: <strong>Satellites (ISS, GPS, Starlink).</strong> </p>
-<p><strong>3. If <span class="arithmatex">\( v_1 &lt; v &lt; v_2 \)</span> (Elliptical Orbit) → Payload in a Non-Circular Orbit:</strong><br/>
-- The payload follows an <strong>elliptical orbit</strong>, returning after each cycle.
-- Example: <strong>Molniya orbits, Hohmann transfer maneuvers.</strong> </p>
-<p><strong>4. If <span class="arithmatex">\( v = v_2 \)</span> (Escape Trajectory) → Payload Leaves Earth:</strong><br/>
-- The payload follows a <strong>parabolic trajectory</strong>, never returning.
-- Example: <strong>Space probes leaving Earth (Voyager, New Horizons).</strong> </p>
-<p><strong>5. If <span class="arithmatex">\( v &gt; v_2 \)</span> (Hyperbolic Escape) → Payload Leaves with Excess Speed:</strong><br/>
-- The payload follows a <strong>hyperbolic trajectory</strong>, escaping Earth's gravity.
-- Example: <strong>Interplanetary missions (Mars rovers, Europa Clipper).</strong> </p>
-<hr/>
-<h2 id="5-real-world-applications"><strong>5. Real-World Applications</strong></h2>
-<h3 id="1-satellite-deployment"><strong>1. Satellite Deployment</strong></h3>
-<ul>
-<li>The right <strong>initial velocity and angle</strong> ensure satellites enter stable orbits.</li>
-<li><strong>Low Earth Orbit (LEO):</strong> 300-2000 km altitude (ISS, Starlink).</li>
-<li><strong>Geostationary Orbit (GEO):</strong> 35,786 km altitude (Weather satellites).</li>
 </ul>
-<h3 id="2-spacecraft-reentry"><strong>2. Spacecraft Reentry</strong></h3>
+<p>$$
+  v = \sqrt{\frac{GM}{r}}
+  $$</p>
 <ul>
-<li>If a payload <strong>loses velocity</strong>, it reenters Earth’s atmosphere.</li>
-<li><strong>Reentry capsules (Soyuz, Dragon, Orion) use heat shields to survive.</strong></li>
+<li><strong>Orbital period</strong> (Kepler’s 3rd Law):</li>
 </ul>
-<h3 id="3-interplanetary-missions"><strong>3. Interplanetary Missions</strong></h3>
+<p>$$
+  T^2 = \frac{4\pi^2 a^3}{GM}
+  $$</p>
+<hr/>
+<h2 id="2-reentry-suborbital-trajectory">2. Reentry (Suborbital Trajectory)</h2>
 <ul>
-<li>Escape velocities determine if a spacecraft reaches the Moon, Mars, or beyond.</li>
-<li><strong>Gravity assists</strong> (e.g., slingshot around Jupiter) are used to save fuel.</li>
+<li>Trajectory with negative energy but insufficient to stay in orbit.</li>
+<li>Often <strong>parabolic-like</strong>.</li>
+<li>
+<p>Involves:</p>
+</li>
+<li>
+<p>High heat generation</p>
+</li>
+<li>Aerodynamic deceleration</li>
+<li>Heat shield requirement</li>
 </ul>
 <hr/>
-<h2 id="6-discussion-extensions"><strong>6. Discussion &amp; Extensions</strong></h2>
-<h3 id="limitations-of-the-model"><strong>Limitations of the Model</strong></h3>
+<h2 id="3-escape-scenarios-hyperbolic">3. Escape Scenarios (Hyperbolic)</h2>
 <ul>
-<li><strong>Does not include air resistance</strong> (important for reentry trajectories).</li>
-<li><strong>Assumes Earth is a perfect sphere</strong> (real gravity varies slightly).</li>
-<li><strong>No external forces</strong> (like solar radiation pressure or thruster burns).</li>
-</ul>
-<h3 id="future-extensions"><strong>Future Extensions</strong></h3>
-<ul>
-<li><strong>Include atmospheric drag</strong> for more accurate reentry calculations.</li>
-<li><strong>Three-body problem</strong> (Earth-Moon-Spacecraft interactions).</li>
-<li><strong>Simulate real mission trajectories</strong> (e.g., Apollo, Artemis, SpaceX launches).</li>
+<li><span class="arithmatex">\(v &gt; \sqrt{\frac{2GM}{r}}\)</span></li>
+<li><span class="arithmatex">\(\epsilon &gt; 0\)</span>, unbound</li>
+<li>Object leaves Earth permanently</li>
 </ul>
 <hr/>
-<h2 id="7-conclusion"><strong>7. Conclusion</strong></h2>
-<p>This problem demonstrates how initial velocity determines a payload’s fate:
-- <strong>Too slow → falls back to Earth</strong> 🌍.
-- <strong>Just right → stays in orbit</strong> 🛰️.
-- <strong>Fast enough → escapes Earth's gravity</strong> 🚀.</p>
-<p>Using <strong>numerical methods (Runge-Kutta)</strong>, we simulated different payload trajectories, visualizing their motion in space. This is <strong>crucial for satellite deployment, space station docking, and interplanetary travel.</strong></p>
+<h2 id="4-visualization-of-different-cases">4. Visualization of Different Cases</h2>
+<p><strong>Python Code for Visualization:</strong></p>
+<h2 id="_2"><img alt="alt text" src="../image-4-1.png"/></h2>
+<h1 id="computational-tool-for-simulation">Computational Tool for Simulation</h1>
+<p>We simulate motion in 2D with Euler’s method.</p>
+<hr/>
+<h2 id="1-update-equations-2d">1. Update Equations (2D)</h2>
+<div class="arithmatex">\[
+\vec{a} = -\frac{GM}{r^3} \vec{r}
+\]</div>
+<div class="arithmatex">\[
+\vec{v}_{t+1} = \vec{v}_t + \vec{a}_t \cdot \Delta t
+\]</div>
+<div class="arithmatex">\[
+\vec{r}_{t+1} = \vec{r}_t + \vec{v}_t \cdot \Delta t
+\]</div>
+<hr/>
+<h2 id="2-required-inputs">2. Required Inputs</h2>
+<ul>
+<li>Initial position <span class="arithmatex">\((x_0, y_0)\)</span></li>
+<li>Initial velocity <span class="arithmatex">\((v_{x0}, v_{y0})\)</span></li>
+<li>Time step <span class="arithmatex">\(\Delta t\)</span></li>
+</ul>
+<hr/>
+<h2 id="3-simulation-visualization">3. Simulation &amp; Visualization</h2>
+<p>Gravitational acceleration affects both components, with motion calculated over many steps.</p>
+<p><strong>Python Code for Simulating and Visualizing:</strong></p>
+<p><img alt="alt text" src="../image-5-2.png"/></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
